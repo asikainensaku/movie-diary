@@ -1,4 +1,4 @@
-package hh.backend.movie_diary;
+package hh.backend.moviediary;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
