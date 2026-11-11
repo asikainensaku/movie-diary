@@ -1,10 +1,19 @@
 package hh.backend.moviediary.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import hh.backend.moviediary.domain.MovieRepository;
 
 @Controller
 public class MovieController {
+
+    private final MovieRepository movieRepository;
+
+    public MovieController(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
+    }
 
     @GetMapping("/moviediary")
     public String moviediary() {
@@ -12,7 +21,8 @@ public class MovieController {
     }
 
     @GetMapping("/movielist")
-    public String movielist() {
+    public String movielist(Model model) {
+        model.addAttribute("movies", movieRepository.findAll());
         return "movielist"; // movielist.html
     }
 
