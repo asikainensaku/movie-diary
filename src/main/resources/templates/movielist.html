@@ -29,8 +29,14 @@
             <td th:text="${movie.watchedDate}"></td>
             <td th:text="${movie.rating}"></td>
             <td th:text="${movie.genre.name}"></td>
+
+            <td>
+                <a class="btn btn-danger" th:href="@{/delete/{id}(id=${movie.id})}">Delete</a>
+                <a class="btn btn-warning" th:href="@{/edit/{id}(id=${movie.id})}">Edit</a>
+            </td>
         </tr>
     </table>
+    <a class="btn btn-success" th:href="@{/add}">Add Movie</a>
 
 </body>
 
