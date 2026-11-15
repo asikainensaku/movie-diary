@@ -2,6 +2,7 @@ package hh.backend.moviediary.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import hh.backend.moviediary.domain.Movie;
 
 import hh.backend.moviediary.domain.MovieRepository;
+import jakarta.validation.Valid;
 import hh.backend.moviediary.domain.GenreRepository;
 
 @Controller
@@ -41,7 +43,18 @@ public class MovieController {
     }
 
     @PostMapping("/save")
-    public String saveMovie(Movie movie) {
+    public String saveMovie(@Valid Movie movie, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("genres", genreRepository.findAll());
+
+            if (movie.getId() == null) {
+                return "addmovie";
+            } else {
+                return "editmovie";
+            }
+
+        }
         if (movie.getGenre() != null) {
             movie.setGenre(
                     genreRepository.findById(movie.getGenre().getId()).get());
