@@ -34,7 +34,7 @@ public class MovieDiaryApplication {
 				genreRepository.save(comedy);
 
 				movieRepository.save(
-						new Movie("Interstellar", "Christopher Nolan", 2014, LocalDate.of(2026, 11, 10), 8,
+						new Movie("Interstellar", "Christopher Nolan", 2014, LocalDate.of(2026, 11, 10), 5,
 								"Amazing movie!", sciFi));
 
 			}
