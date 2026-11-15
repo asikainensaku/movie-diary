@@ -16,18 +16,23 @@
 
         <label>Title:</label>
         <input type="text" th:field="*{title}">
+        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
 
         <label>Director:</label>
         <input type="text" th:field="*{director}">
+        <span th:if="${#fields.hasErrors('director')}" th:errors="*{director}"></span>
 
         <label>Release year:</label>
         <input type="number" th:field="*{releaseYear}">
+        <span th:if="${#fields.hasErrors('releaseYear')}" th:errors="*{releaseYear}"></span>
 
         <label>Watched date:</label>
         <input type="date" th:field="*{watchedDate}">
+        <span th:if="${#fields.hasErrors('watchedDate')}" th:errors="*{watchedDate}"></span>
 
         <label>Rating 0-5:</label>
-        <input type="number" th:field="*{rating}">
+        <input type="number" th:field="*{rating}" min="0" max="5">
+        <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></span>
 
         <label>Genre:</label>
 
@@ -35,6 +40,7 @@
             <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}">
             </option>
         </select>
+        <span th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></span>
 
         <label>Review:</label>
         <textarea th:field="*{review}"></textarea>

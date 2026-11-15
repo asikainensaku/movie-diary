@@ -101,7 +101,7 @@ public class Movie {
         return director;
     }
 
-    public int getReleaseYear() {
+    public Integer getReleaseYear() {
         return releaseYear;
     }
 
@@ -109,7 +109,7 @@ public class Movie {
         return watchedDate;
     }
 
-    public int getRating() {
+    public Integer getRating() {
         return rating;
     }
 
