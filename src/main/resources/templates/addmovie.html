@@ -29,7 +29,7 @@
         <label>Rating 0-5:</label>
         <input type="number" th:field="*{rating}">
 
-        <label>Category:</label>
+        <label>Genre:</label>
 
         <select th:field="*{genre}">
             <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}">

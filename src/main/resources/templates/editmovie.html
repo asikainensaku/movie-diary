@@ -5,12 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit movie</title>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
 
 <body>
 
-
     <h1>Edit movie</h1>
+
+    <form th:object="${movie}" th:action="@{/save}" method="post">
+
+        <label>Title:</label>
+        <input type="text" th:field="*{title}">
+
+        <label>Director:</label>
+        <input type="text" th:field="*{director}">
+
+        <label>Release year:</label>
+        <input type="number" th:field="*{releaseYear}">
+
+        <label>Watched date:</label>
+        <input type="date" th:field="*{watchedDate}">
+
+        <label>Rating 0-5:</label>
+        <input type="number" th:field="*{rating}">
+
+        <label>Genre:</label>
+
+        <select th:field="*{genre}">
+            <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}">
+            </option>
+        </select>
+
+        <label>Review:</label>
+        <textarea th:field="*{review}"></textarea>
+
+        <input type="submit" value="Save">
+    </form>
 
 </body>
 
