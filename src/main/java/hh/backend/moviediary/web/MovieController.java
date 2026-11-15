@@ -64,6 +64,12 @@ public class MovieController {
         return "redirect:/movielist";
     }
 
+    @GetMapping("/delete/{id}")
+    public String deleteMovie(@PathVariable("id") Long id) {
+        movieRepository.deleteById(id);
+        return "redirect:/movielist";
+    }
+
     @GetMapping("/edit/{id}")
     public String editMovie(@PathVariable("id") Long id, Model model) {
         model.addAttribute("movie", movieRepository.findById(id).get());
