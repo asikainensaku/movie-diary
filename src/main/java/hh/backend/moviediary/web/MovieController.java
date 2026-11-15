@@ -4,15 +4,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import hh.backend.moviediary.domain.GenreRepository;
+import hh.backend.moviediary.domain.Movie;
 import hh.backend.moviediary.domain.MovieRepository;
 
 @Controller
 public class MovieController {
 
     private final MovieRepository movieRepository;
+    private final GenreRepository genreRepository;
 
-    public MovieController(MovieRepository movieRepository) {
+    public MovieController(MovieRepository movieRepository, GenreRepository genreRepository) {
         this.movieRepository = movieRepository;
+        this.genreRepository = genreRepository;
     }
 
     @GetMapping("/moviediary")
@@ -27,7 +31,9 @@ public class MovieController {
     }
 
     @GetMapping("/add")
-    public String addMovie() {
+    public String addMovie(Model model) {
+        model.addAttribute("movie", new Movie());
+        model.addAttribute("genres", genreRepository.findAll());
         return "addmovie"; // addmovie.html
     }
 
