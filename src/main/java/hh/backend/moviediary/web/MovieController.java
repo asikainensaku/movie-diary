@@ -3,6 +3,7 @@ package hh.backend.moviediary.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import hh.backend.moviediary.domain.Movie;
@@ -50,9 +51,11 @@ public class MovieController {
         return "redirect:/movielist";
     }
 
-    @GetMapping("/edit")
-    public String editBook() {
-        return "editbook"; // editbook.html
+    @GetMapping("/edit/{id}")
+    public String editMovie(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("movie", movieRepository.findById(id).get());
+        model.addAttribute("genres", genreRepository.findAll());
+        return "editmovie"; // editmovie.html
     }
 
     @GetMapping("/login")
