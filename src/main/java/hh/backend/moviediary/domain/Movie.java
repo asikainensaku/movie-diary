@@ -8,6 +8,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
+import jakarta.validation.constraints.*;
+
 @Entity
 public class Movie {
 
@@ -16,13 +18,26 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String title;
+
+    @NotBlank
     private String director;
-    private int releaseYear;
+
+    @NotNull
+    private Integer releaseYear;
+
+    @NotNull
     private LocalDate watchedDate;
-    private int rating;
+
+    @NotNull
+    @Min(0)
+    @Max(5)
+    private Integer rating;
+
     private String review;
 
+    @NotNull
     @ManyToOne
     private Genre genre;
 
