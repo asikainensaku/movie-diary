@@ -9,11 +9,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import java.time.LocalDate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import hh.backend.moviediary.domain.Genre;
 import hh.backend.moviediary.domain.GenreRepository;
 
 @SpringBootApplication
 public class MovieDiaryApplication {
+
+	private static final Logger log = LoggerFactory.getLogger(MovieDiaryApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(MovieDiaryApplication.class, args);
@@ -57,31 +62,40 @@ public class MovieDiaryApplication {
 				genreRepository.save(animation);
 				genreRepository.save(anime);
 
-				movieRepository.save(
-						new Movie("Interstellar", "Christopher Nolan", 2014, LocalDate.of(2026, 11, 10), 5,
-								"Amazing movie!", sciFi));
-				new Movie("The Lord of the Rings: The Fellowship of the Ring", "Peter Jackson", 2001,
-						LocalDate.of(2026, 8, 12), 5, "An amazing fantasy adventure!", fantasy);
+				log.info("Genres:");
+				genreRepository.findAll().forEach(genre -> log.info(genre.getName()));
 
-				new Movie("The Conjuring", "James Wan", 2013, LocalDate.of(2026, 7, 5), 4,
-						"A genuinely scary horror movie.", horror);
+				movieRepository.save(new Movie("Interstellar", "Christopher Nolan", 2014,
+						LocalDate.of(2026, 11, 10), 5, "Amazing movie!", sciFi));
 
-				new Movie("Pulp Fiction", "Quentin Tarantino", 1994, LocalDate.of(2026, 6, 18), 5,
-						"Great dialogue and unforgettable characters.", crime);
+				movieRepository.save(new Movie("The Lord of the Rings: The Fellowship of the Ring",
+						"Peter Jackson", 2001, LocalDate.of(2026, 8, 12), 5,
+						"An amazing fantasy adventure!", fantasy));
 
-				new Movie("The Grand Budapest Hotel", "Wes Anderson", 2014, LocalDate.of(2026, 5, 22), 4,
-						"Beautiful visuals and a very entertaining story.", comedy);
+				movieRepository.save(new Movie("The Conjuring", "James Wan", 2013,
+						LocalDate.of(2026, 7, 5), 4, "A genuinely scary horror movie.", horror));
 
-				new Movie("Gladiator", "Ridley Scott", 2000, LocalDate.of(2026, 4, 10), 5,
-						"An epic historical action movie.", action);
+				movieRepository.save(new Movie("Pulp Fiction", "Quentin Tarantino", 1994,
+						LocalDate.of(2026, 6, 18), 5,
+						"Great dialogue and unforgettable characters.", crime));
 
-				new Movie("Spirited Away", "Hayao Miyazaki", 2001, LocalDate.of(2026, 3, 14), 5,
-						"A beautiful and imaginative animated film.", animation);
+				movieRepository.save(new Movie("The Grand Budapest Hotel", "Wes Anderson", 2014,
+						LocalDate.of(2026, 5, 22), 4,
+						"Beautiful visuals and a very entertaining story.", comedy));
 
-				new Movie("The Notebook", "Nick Cassavetes", 2004, LocalDate.of(2026, 2, 8), 4,
-						"A touching romantic story.", romance);
+				movieRepository.save(new Movie("Gladiator", "Ridley Scott", 2000,
+						LocalDate.of(2026, 4, 10), 5, "An epic historical action movie.", action));
 
+				movieRepository.save(new Movie("Spirited Away", "Hayao Miyazaki", 2001,
+						LocalDate.of(2026, 3, 14), 5,
+						"A beautiful and imaginative animated film.", animation));
+
+				movieRepository.save(new Movie("The Notebook", "Nick Cassavetes", 2004,
+						LocalDate.of(2026, 2, 8), 4,
+						"A touching romantic story.", romance));
 			}
+			log.info("Movies");
+			movieRepository.findAll().forEach(movie -> log.info(movie.toString()));
 		};
 	}
 }
